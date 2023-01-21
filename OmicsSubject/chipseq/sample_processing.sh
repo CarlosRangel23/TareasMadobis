@@ -14,7 +14,6 @@ sampleSRA=$3 # Text file with SRA accession number (One accesion number for each
 for i in $(seq 1 $(($number-1))); do # All the directories are read except reference genome directory
         samplecd=$(sed -n "${i}p" $sampledir) # Assign working directory of the sample
         samplefastq=$(sed -n "${i}p" $sampleSRA) # Set accesion number
-        samplename=$(sed -n "${i}p" $names) # Set sample name
 
 ## Download of the sequence
         cd $samplecd # Set working directory
