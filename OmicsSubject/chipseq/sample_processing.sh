@@ -8,7 +8,7 @@
 sampledir=$1 # Text file with directory of every sample (experimental design is required prior script execution)
 # Important --> Last line in the text file must be the reference genome directory
 number=$(wc -l < $sampledir) # Number of samples (including control samples)
-sampleSRA=$3 # Text file with SRA accession number (One accesion number for each line)
+sampleSRA=$2 # Text file with SRA accession number (One accesion number for each line)
 
 ## Processing start
 for i in $(seq 1 $(($number-1))); do # All the directories are read except reference genome directory
