@@ -45,4 +45,5 @@ for i in $(seq 1 $(($number-1))); do # All the directories are read except refer
         echo "Bam, bam index and bw files for $samplefastq generated" ## Check control
 done
 
-        echo "Job finished"
+echo "Job finished"
+echo "Next part --> Peaks Calling"
