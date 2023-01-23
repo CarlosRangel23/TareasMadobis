@@ -84,7 +84,7 @@ if [ $Ninput -eq 1 ]; then
                 samplefastq=$(sed -n "${i}p" $sampleSRA) # Set accesion number
 
                 cd $resultdir
-                macs2callpeak -t $samplecd/*.bam -c $onlyinput/*.bam -f BAM -n $samplefastq
+                macs2callpeak -t $samplecd/*.bam -c $onlyinput/*.bam -f BAM --outdir . -n $samplefastq
 
                 echo "-----------------------------------------------------------------------"
                 echo "PEAK CALLING FOR $samplefastq DONE" ## Check control
@@ -107,7 +107,7 @@ else
                 inputcd=$(sed -n "${i}p" $input) # Assign directory of the bam control input file
 
                 cd $resultdir
-                macs2callpeak -t $samplecd/*.bam -c $inputcd/*.bam -f BAM -n $samplefastq
+                macs2callpeak -t $samplecd/*.bam -c $inputcd/*.bam -f BAM --outdir . -n $samplefastq
 
                 echo "-----------------------------------------------------------------------"
                 echo "PEAK CALLING FOR $samplefastq DONE" ## Check control
