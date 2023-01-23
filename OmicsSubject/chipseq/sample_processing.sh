@@ -76,7 +76,7 @@ echo "###############################"
 
 ## Data processing only with one input
 
-if [$Ninput -ne 0]; then
+if [ $Ninput -eq 1 ]; then
         onlyinput=$(head -n 1 < $input)
         for i in $(seq 1 $Nsamples); do # All the chip samples are read
                 samplecd=$(sed -n "${i}p" $sample) # Assign working directory of the sample
@@ -90,14 +90,12 @@ if [$Ninput -ne 0]; then
                 echo "-----------------------------------------------------------------------"
                 cd $ssodir
 
-fi
-
 ## Data processing with more than one input
 ## Here we assume that chip01´s control is input01, for chip02 input02, and so on.
-## That is to say, Number of chip samples must be equal to Number of control inputs
+## That is to say, number of chip samples must be equal to number of control inputs
 
 else
-        if [$Ninput -ne $Nsamples]; then
+        if [ $Ninput -ne $Nsamples ]; then
                 echo "Fatal error, number of control samples and number of chip samples differ"
                 exit
         fi
@@ -105,7 +103,7 @@ else
         for i in $(seq 1 $Nsamples); do # All the chips samples are read
                 samplecd=$(sed -n "${i}p" $sample) # Assign directory of the bam chip sample file
                 samplefastq=$(sed -n "${i}p" $sampleSRA) # Set accesion number
-                inputcd==$(sed -n "${i}p" $input) # Assign directory of the bam control input file
+                inputcd=$(sed -n "${i}p" $input) # Assign directory of the bam control input file
 
                 cd $resultdir
                 macs2callpeak -t $samplecd/*.bam -c $inputcd/*.bam -f BAM -n $samplefastq
@@ -120,4 +118,3 @@ fi
 echo "######################"
 echo "#### JOB FINISHED ####"
 echo "######################"
-
