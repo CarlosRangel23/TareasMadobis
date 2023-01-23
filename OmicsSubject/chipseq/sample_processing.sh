@@ -10,18 +10,19 @@
 sampledir=$1 # Text file with directory of every sample (experimental design is required prior script execution)
 # Important --> In sampledir file, inputs files must be the last ones
 
-otherdir=$2 # Text file where: first line: route to reference genome; second line: route to results folder
-sampleSRA=$3 # Text file with SRA accession number (One accesion number for each line)
-ssodir=$(head -n 1 < $4) # Route to folder with sampledir, otherdir and sampleSRA routes
-
 number=$(wc -l < $sampledir) # All samples, including inputs
 input=$(grep "input" $sampledir) # Only inputs route
-Ninput=$(wc -l < $input) # Number of inputs done
+Ninput=$(wc -l < $input) # Number of inputs
 sample=$(grep -v "input" $sampledir) # Only samples route
 Nsamples=$(wc -l < $sample) # Number of samples
 
+otherdir=$2 # Text file where: first line: route to reference genome; second line: ssodir; third line: route to results folder
 genomedir=$(head -n 1 < $otherdir) # Reference genome directory --> Reference genome must be in fasta format
 resultsdir=$(tail -n 1 < $otherdir) # Results directory
+ssodir=$(head -n 2 < $otherdir | tail -n 1) # Route to folder with sampledir, otherdir and sampleSRA routes
+
+sampleSRA=$3 # Text file with SRA accession number (One accesion number for each line)
+
 
 echo "#############################"
 echo "### STARTING THE ANALISYS ###"
@@ -92,7 +93,7 @@ if [ $Ninput -eq 1 ]; then
 
 ## Data processing with more than one input
 ## Here we assume that chip01´s control is input01, for chip02 input02, and so on.
-## That is to say, number of chip samples must be equal to number of control inputs
+## That is to say, Number of chip samples must be equal to Number of control inputs
 
 else
         if [ $Ninput -ne $Nsamples ]; then
@@ -118,3 +119,4 @@ fi
 echo "######################"
 echo "#### JOB FINISHED ####"
 echo "######################"
+
