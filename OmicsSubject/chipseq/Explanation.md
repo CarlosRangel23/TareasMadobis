@@ -4,7 +4,7 @@ This script automatically generates, for a limited number of parameters and cond
 Before running the code, the following experimental design must be available:
 
 * annotationre
-     reference_genome.gtf
+     * reference_genome.gtf
 ├── genome
 │   └── genome.fa
 ├── results
