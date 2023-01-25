@@ -3,23 +3,23 @@ This script automatically generates, for a limited number of parameters and cond
 
 Before running the code, the following experimental design must be available:
 
-* annotationre
-     * reference_genome.gtf
-├── genome
-│   └── genome.fa
-├── results
-├── samples
-│    ├── chip01
-│    ├── chip02
-│    ├── ...
-│    ├── input01
-│    ├── input02
-│    └── ...
-└── scripts
-     ├── onescript_forall.sh
-     ├── sampledir
-     ├── otherdir
-     └── sampleSRA
+* annotation
+    * reference_genome.gtf
+* genome
+    * genome.fa
+* results
+* samples
+    * chip01
+    * chip02
+    * ...
+    * input01
+    * input02
+    * ...
+* scripts
+    * onescript_forall.sh
+    * sampledir
+    * otherdir
+    * sampleSRA
 
 How should the sampledir, otherdir and sampleSRA files be organized?
 - sampledir: must contain the absolute paths to the folder where you want the samples to be downloaded and the .bam .bam.bai and .bw files to be generated. It is important that in the sampledir file one absolute path is written per line, as shown in the example. On the other hand, it is also important to order the routes correctly, that is, if we have several inputs, maintain the same order between the treated samples and the inputs. Thus, when peak calling is made, the macs2 program can be used sequentially, using its corresponding input for each sample. Finally, it is important to place the route of the treated samples first and then the route of the inputs.
@@ -33,24 +33,23 @@ Este script genera automáticamente, para un número limitado de parámetros y c
 
 Antes de correr el código, se debe disponer del siguiente diseño experimental:
 
-.
-├── annotation
-│   └── reference_genome.gtf
-├── genome
-│   └── genome.fa
-├── results
-├── samples
-│    ├── chip01
-│    ├── chip02
-│    ├── ...
-│    ├── input01
-│    ├── input02
-│    └── ...
-└── scripts
-     ├── onescript_forall.sh
-     ├── sampledir
-     ├── otherdir
-     └── sampleSRA
+* annotation
+    * reference_genome.gtf
+* genome
+    * genome.fa
+* results
+* samples
+    * chip01
+    * chip02
+    * ...
+    * input01
+    * input02
+    * ...
+* scripts
+    * onescript_forall.sh
+    * sampledir
+    * otherdir
+    * sampleSRA
      
 ¿Cómo deben organizarse los archivos sampledir, otherdir y sampleSRA?
 - sampledir: debe contener las rutas absolutas a la carpeta donde quieres que se descarguen las muestras y se generen los archivos .bam .bam.bai y .bw. Es importante que en el fichero sampledir se escriba una ruta absoluta por línea, como se muestra en el ejemplo. Por otra parte, es importante también ordenar las rutas correctamente, es decir, si disponemos de varios inputs, mantener el mismo orden entre las muestras tratadas y los inputs. Así, cuando se haga el peak calling se podrá utilizar secuencialmente el programa macs2 utilizando para cada muestra su correspondiente input. Finalmente, es importante colocar primero la ruta de las muestras tratdas y posteriormente la ruta de los inputs.
