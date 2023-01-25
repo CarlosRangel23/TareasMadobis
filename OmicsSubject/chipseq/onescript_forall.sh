@@ -23,7 +23,7 @@ sampleSRA=$3 # Text file with SRA accession number (One accesion number for each
 
 echo " "
 echo "#############################"
-echo "### STARTING THE ANALISYS ###"
+echo "### STARTING THE ANALYSIS ###"
 echo "#############################"
 echo " "
 
