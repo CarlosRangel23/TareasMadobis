@@ -26,7 +26,7 @@ How should the sampledir, otherdir and sampleSRA files be organized?
 - otherdir: it is another file where we will store the file paths. The first absolute path to be written will correspond to genome, the second to the folder where sampledir, otherdir and sampleSRA are located. Finally, the third route will be the one that indicates where we want the results to be saved (results in our case).
 - sampleSRA: the accession number of each sample, including the inputs. Each line corresponds to a sample and it is important to follow the same order as the one we have followed in sampledir.
 
-An example is shown in the test folder.
+An example is shown in the [test](https://github.com/CarlosRangel23/TareasMadobis/tree/main/OmicsSubject/chipseq/test) folder.
 
 ## Español (Spanish)
 Este script genera automáticamente, para un número limitado de parámetros y condiciones, los archivos .narrowPeak y .bed para una muestra de chipseq. Es importante tener en cuenta que el archivo no funciona si no proporcionamos ningún archivo input, al igual que tampoco funcionaría si, en caso de que haya más de un input, el número de inputs difiera del número de muestras tratadas. Además, también se genera para cada muestra, incluida el control, archivos .bam y .bw, que no son eliminados por si existe interés en analizarlos en softwares como el IGV.
@@ -56,4 +56,4 @@ Antes de correr el código, se debe disponer del siguiente diseño experimental:
 - otherdir: es otro fichero donde guardaremos las rutas de archivos. La primera ruta absoluta que se escribirá corresponderá a genome, la segunda al folder donde se encuentren sampledir, otherdir y sampleSRA. Por último, la tercera ruta será aquella que indique donde queremos que se guarden los resultados (results en nuestro caso).
 - sampleSRA: los accession number de cada muestra, incluyendo los inputs. Cada línea corresponde con una muestra y es importante que se siga el mismo orden que aquel que hemos seguido en sampledir.
 
-Un ejemplo se muestra en la carpeta test.
+Un ejemplo se muestra en la carpeta [test](https://github.com/CarlosRangel23/TareasMadobis/tree/main/OmicsSubject/chipseq/test).
