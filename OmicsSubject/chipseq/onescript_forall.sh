@@ -5,16 +5,14 @@
 ## Chip-Seq -- Data processing --> Only for experiments using input as control.
 
 ## Variables used during the script
-
 # Important --> In the experimental design, all the inputs folders must be named as input.
 sampledir=$1 # Text file with directory of every sample (experimental design is required prior script execution)
 # Important --> In sampledir file, inputs files must be the last ones
-
 number=$(wc -l < $sampledir) # All samples, including inputs
-input=$(grep "input" $sampledir) # Only inputs route
-Ninput=$(wc -l < $input) # Number of inputs
+input=$(grep "input" $sampledir | wc -l) # Only inputs route
+Ninput=$(grep "input" $sampledir | wc -l) # Number of inputs done
 sample=$(grep -v "input" $sampledir) # Only samples route
-Nsamples=$(wc -l < $sample) # Number of samples
+Nsamples=$(grep -v "input" $sampledir | wc -l) # Number of samples
 
 otherdir=$2 # Text file where: first line: route to reference genome; second line: ssodir; third line: route to results folder
 genomedir=$(head -n 1 < $otherdir) # Reference genome directory --> Reference genome must be in fasta format
@@ -23,10 +21,11 @@ ssodir=$(head -n 2 < $otherdir | tail -n 1) # Route to folder with sampledir, ot
 
 sampleSRA=$3 # Text file with SRA accession number (One accesion number for each line)
 
-
+echo " "
 echo "#############################"
 echo "### STARTING THE ANALISYS ###"
 echo "#############################"
+echo " "
 
 ## Generate reference genome index
 cd $genomedir
@@ -71,25 +70,30 @@ for i in $(seq 1 $number); do # All the directories are read
         cd $ssodir ## Return to folder directory
 done
 
+echo " "
 echo "###############################"
 echo "#### STARTING PEAK CALLING ####"
 echo "###############################"
+echo " "
 
 ## Data processing only with one input
 
 if [ $Ninput -eq 1 ]; then
         onlyinput=$(head -n 1 < $input)
         for i in $(seq 1 $Nsamples); do # All the chip samples are read
-                samplecd=$(sed -n "${i}p" $sample) # Assign working directory of the sample
+                samplecd=$(grep -v "input" $sampledir | sed -n ${i}p) # Assign directory of the bam chip sample file
                 samplefastq=$(sed -n "${i}p" $sampleSRA) # Set accesion number
 
-                cd $resultdir
-                macs2callpeak -t $samplecd/*.bam -c $onlyinput/*.bam -f BAM --outdir . -n $samplefastq
+                cd $resultsdir
+                macs2 callpeak -t $samplecd/*.bam -c $onlyinput/*.bam -f BAM --outdir . -n $samplefastq
 
+                echo " "
                 echo "-----------------------------------------------------------------------"
                 echo "PEAK CALLING FOR $samplefastq DONE" ## Check control
                 echo "-----------------------------------------------------------------------"
+                echo " "
                 cd $ssodir
+        done
 
 ## Data processing with more than one input
 ## Here we assume that chip01´s control is input01, for chip02 input02, and so on.
@@ -102,21 +106,25 @@ else
         fi
 
         for i in $(seq 1 $Nsamples); do # All the chips samples are read
-                samplecd=$(sed -n "${i}p" $sample) # Assign directory of the bam chip sample file
+                samplecd=$(grep -v "input" $sampledir | sed -n ${i}p) # Assign directory of the bam chip sample file
                 samplefastq=$(sed -n "${i}p" $sampleSRA) # Set accesion number
-                inputcd=$(sed -n "${i}p" $input) # Assign directory of the bam control input file
+                inputcd=$(grep "input" $sampledir | sed -n ${i}p) # Assign directory of the bam control input file
 
-                cd $resultdir
-                macs2callpeak -t $samplecd/*.bam -c $inputcd/*.bam -f BAM --outdir . -n $samplefastq
+                cd $resultsdir
+                macs2 callpeak -t $samplecd/*.bam -c $inputcd/*.bam -f BAM --outdir . -n $samplefastq
 
+                echo " "
                 echo "-----------------------------------------------------------------------"
                 echo "PEAK CALLING FOR $samplefastq DONE" ## Check control
                 echo "-----------------------------------------------------------------------"
+                echo " "
                 cd $ssodir
+        done
 
 fi
 
+echo " "
 echo "######################"
 echo "#### JOB FINISHED ####"
 echo "######################"
-
+echo " "
