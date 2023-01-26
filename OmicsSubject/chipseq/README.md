@@ -1,3 +1,5 @@
+### GRUPO 4
+
 ## English -- Spanish at the bottom
 This script automatically generates, for a limited number of parameters and conditions, the .narrowPeak and .bed files for a chipseq sample. It is important to note that the file does not work if we do not provide any input file, just as it would not work if, in case there is more than one input, the number of inputs differs from the number of samples treated. In addition, .bam and .bw files are also generated for each sample, including the control, which are not deleted in case there is interest in analyzing them in software such as the IGV.
 
